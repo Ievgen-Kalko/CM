@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:drools="http://drools.org/schema/drools-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  http://drools.org/schema/drools-spring http://drools.org/schema/drools-spring.xsd">
+
+    <!-- KNOWLEDGE BASE -->
+    <drools:kbase id="coinsKBase">
+        <drools:resources>
+            <drools:resource type="DTABLE" source="classpath:rules/CoinPrice.xls"/>
+        </drools:resources>
+    </drools:kbase>
+
+    <drools:ksession id="coinsKSession" name="coinsKSession" type="stateless" kbase="coinsKBase"/>
+
+    <bean id="coinPriceRuleRunner" class="com.cm.processors.rule.CoinPriceRuleRunner">
+        <property name="coinsKSession" ref="coinsKSession" />
+        <property name="coinsKBase" ref="coinsKBase" />
+    </bean>
+
+</beans>

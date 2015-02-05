@@ -51,6 +51,12 @@ public class Coin extends AbstractAuditableEntity {
     @Column(name = "PRICE")
     private BigDecimal price;
 
+    @Transient
+    private boolean isGradeRestricted;
+
+    @Transient
+    private BigDecimal rawPrice;
+
     public Coin() {
     }
 
@@ -83,7 +89,6 @@ public class Coin extends AbstractAuditableEntity {
     }
 
     public CompositionType getComposition() {
-
         return composition;
     }
 
@@ -109,6 +114,22 @@ public class Coin extends AbstractAuditableEntity {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public void setGradeRestricted(boolean isGradeRestricted) {
+        this.isGradeRestricted = isGradeRestricted;
+    }
+
+    public void setRawPrice(BigDecimal rawPrice) {
+        this.rawPrice = rawPrice;
+    }
+
+    public boolean isGradeRestricted() {
+        return isGradeRestricted;
+    }
+
+    public BigDecimal getRawPrice() {
+        return rawPrice;
     }
 
     public static enum CompositionType {

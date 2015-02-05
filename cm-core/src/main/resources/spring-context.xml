@@ -45,5 +45,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
         <property name="username" value="CM" />
         <property name="password" value="password1" />
     </bean>
+    
+    <import resource="rules-context.xml"/>
 
 </beans>
