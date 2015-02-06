@@ -3,10 +3,13 @@ package com.cm.domain.model;
 import com.cm.domain.AbstractAuditableEntity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "CM_T_COINS")
+@XmlRootElement
 public class Coin extends AbstractAuditableEntity {
 
     public enum Columns {
@@ -57,26 +60,32 @@ public class Coin extends AbstractAuditableEntity {
     public Coin() {
     }
 
+    @XmlElement
     public void setComposition(CompositionType composition) {
         this.composition = composition;
     }
 
+    @XmlElement
     public void setGrade(GradeType grade) {
         this.grade = grade;
     }
 
+    @XmlElement
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @XmlElement
     public void setCountry(String country) {
         this.country = country;
     }
 
+    @XmlElement
     public void setYear(long year) {
         this.year = year;
     }
 
+    @XmlElement
     public void setCirculation(long circulation) {
         this.circulation = circulation;
     }
