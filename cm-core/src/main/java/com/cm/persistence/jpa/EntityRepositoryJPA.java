@@ -20,10 +20,6 @@ import java.io.Serializable;
 public abstract class EntityRepositoryJPA<Type extends JPAEntity<PK>, PK extends Serializable> implements EntityRepository<Type, PK> {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(EntityRepositoryJPA.class);
-    //TODO - For what it exists here
-//    private static final long serialVersionUID = 1287435634234657L;
-
-    //TODO - Implement logging
 
     @PersistenceContext
     protected EntityManager entityManager;

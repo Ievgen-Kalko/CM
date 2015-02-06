@@ -105,7 +105,7 @@ public class Coin extends AbstractAuditableEntity {
     public String getDescription() {
         return description;
     }
-
+ 
     public String getCountry() {
         return country;
     }

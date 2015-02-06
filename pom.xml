@@ -17,6 +17,7 @@
         <commons.bdcp.version>1.2.2</commons.bdcp.version>
         <oracle.driver.version>11.2.0.3</oracle.driver.version>
         <junit.version>4.11</junit.version>
+        <powermock.version>1.6.1</powermock.version>
     </properties>
 
     <dependencies>
@@ -50,6 +51,13 @@
             <artifactId>spring-context-support</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -115,6 +123,32 @@
             <artifactId>mail</artifactId>
             <version>1.4.3</version>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 

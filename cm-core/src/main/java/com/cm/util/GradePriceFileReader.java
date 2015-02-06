@@ -27,10 +27,11 @@ public class GradePriceFileReader {
     }
 
     public BigDecimal getGradeMultiplier(Coin.GradeType gradeType) throws CmGenericException {
-        //TODO - Costly solution - try to get actual values from properties file in a smarter way
         try {
-            inputStream = getClass().getClassLoader().getResourceAsStream(FILE_LOCATION);
-            properties.load(inputStream);
+            if(inputStream == null) {
+                inputStream = getClass().getClassLoader().getResourceAsStream(FILE_LOCATION);
+                properties.load(inputStream);
+            }
 
             String rawMultiplier = properties.getProperty(gradeType.toString());
 

@@ -1,5 +1,6 @@
 package com.cm.processors;
 
+import com.cm.util.CmGenericException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ public class FileProcessor {
     public FileProcessor() {
     }
 
-    public List<File> getFiles(String path) {
+    public List<File> getFiles(String path) throws CmGenericException {
         List<File> files = new ArrayList<>();
 
         try {
@@ -30,13 +31,13 @@ public class FileProcessor {
             });
         } catch (IOException e) {
             LOGGER.error("Cannot read file.");
-            e.printStackTrace();
+            throw new CmGenericException("Cannot read file", e);
         }
 
         return files;
     }
 
-    public void moveFile(File file, String newPath) {
+    public void moveFile(File file, String newPath) throws CmGenericException {
         try{
             boolean isMoved = file.renameTo(new File(newPath + file.getName()));
 
@@ -45,6 +46,7 @@ public class FileProcessor {
             }
         }catch(Exception e){
             LOGGER.warn("Error occurred while trying to move file [" + file.getName() + "] to [" + newPath + "].");
+            throw new CmGenericException("Error occurred while trying to move file [" + file.getName() + "] to [" + newPath + "].", e);
         }
     }
 }
