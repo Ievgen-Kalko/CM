@@ -1,8 +1,9 @@
 package com.cm.processors;
 
 import com.cm.domain.model.Coin;
-import com.cm.processors.rule.CoinPriceRuleRunner;
+import com.cm.helpers.CoinPriceRuleHelper;
 import com.cm.service.CoinService;
+import com.cm.util.CmGenericException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,9 @@ public class MainProcessor {
     private final static Logger LOGGER = LoggerFactory.getLogger(MainProcessor.class);
 
     @Autowired
-    private CoinPriceRuleRunner ruleRunner;
+    private CoinPriceRuleHelper ruleRunner;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CmGenericException {
         LOGGER.info("************** BEGINNING PROGRAM **************");
 
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
@@ -28,22 +29,20 @@ public class MainProcessor {
 
         Coin coin = new Coin();
         coin.setCirculation(2000L);
-        coin.setComposition(Coin.CompositionType.COPPER);
-        coin.setCountry("UA");
+        coin.setComposition(Coin.CompositionType.SILVER);
+        coin.setCountry("US");
         coin.setDescription("Test 001");
-        coin.setGrade(Coin.GradeType.EXTRA_FINE);
-        coin.setYear("1238");
+        coin.setGrade(Coin.GradeType.VERY_FINE);
+        coin.setYear(1935);
 
-        mainProcessor.processCoin(coin);
-
-        coinService.saveCoin(coin);
-
-        LOGGER.info("Coin persisted sucesfuly");
+        try {
+            coinService.processNewCoin(coin);
+        } catch (CmGenericException e) {
+            //TODO - Write coin's parameters
+            LOGGER.error("Error occurred during processing new coin");
+            throw e;
+        }
 
         LOGGER.info("************** ENDING PROGRAM *****************");
-    }
-
-    public Coin processCoin(Coin coin) {
-        return ruleRunner.execute(coin);
     }
 }

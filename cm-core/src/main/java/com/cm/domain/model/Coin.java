@@ -43,16 +43,13 @@ public class Coin extends AbstractAuditableEntity {
     private String country;
 
     @Column(name = "YEAR")
-    private String year;
+    private long year;
 
     @Column(name = "CIRCULATION")
     private long circulation;
 
     @Column(name = "PRICE")
     private BigDecimal price;
-
-    @Transient
-    private boolean isGradeRestricted;
 
     @Transient
     private BigDecimal rawPrice;
@@ -76,7 +73,7 @@ public class Coin extends AbstractAuditableEntity {
         this.country = country;
     }
 
-    public void setYear(String year) {
+    public void setYear(long year) {
         this.year = year;
     }
 
@@ -104,7 +101,7 @@ public class Coin extends AbstractAuditableEntity {
         return country;
     }
 
-    public String getYear() {
+    public long getYear() {
         return year;
     }
 
@@ -116,20 +113,25 @@ public class Coin extends AbstractAuditableEntity {
         return price;
     }
 
-    public void setGradeRestricted(boolean isGradeRestricted) {
-        this.isGradeRestricted = isGradeRestricted;
-    }
-
     public void setRawPrice(BigDecimal rawPrice) {
         this.rawPrice = rawPrice;
     }
 
-    public boolean isGradeRestricted() {
-        return isGradeRestricted;
-    }
-
     public BigDecimal getRawPrice() {
         return rawPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Coin: [" +
+                "Composition: " + getComposition().toString() +
+                ", Country: " + getCountry() +
+                ", Year: " + getYear() +
+                ", Grade: " + getGrade().toString() +
+                ", Price: " + getPrice() +
+                ", Circulation: " + getCirculation() +
+                ", Description: " + getDescription() +
+                "].";
     }
 
     public static enum CompositionType {

@@ -14,7 +14,7 @@
 
     <drools:ksession id="coinsKSession" name="coinsKSession" type="stateless" kbase="coinsKBase"/>
 
-    <bean id="coinPriceRuleRunner" class="com.cm.processors.rule.CoinPriceRuleRunner">
+    <bean id="coinPriceRuleRunner" class="com.cm.helpers.CoinPriceRuleHelper">
         <property name="coinsKSession" ref="coinsKSession" />
         <property name="coinsKBase" ref="coinsKBase" />
     </bean>

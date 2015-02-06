@@ -8,11 +8,11 @@
 -- Populate CM_T_COINS table
 CREATE TABLE CM_T_COINS (
     ID          INTEGER       not null,
-    DESCRIPTION VARCHAR2(255) not null,
+    DESCRIPTION VARCHAR2(255)     null,
     COMPOSITION NUMBER(1)     not null,
-    COUNTRY     VARCHAR2(3)     not null,
-    YEAR        VARCHAR2(4)   not null,
-    CIRCULATION INTEGER       not null,
+    COUNTRY     VARCHAR2(3)   not null,
+    YEAR        NUMBER(4)     not null,
+    CIRCULATION INTEGER           null,
     GRADE       NUMBER(1)     not null,
     PRICE       NUMBER(35,2)      null,
     CREATEDAT   TIMESTAMP     not null,
