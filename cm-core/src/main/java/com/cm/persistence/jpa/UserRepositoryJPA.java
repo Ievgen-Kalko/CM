@@ -1,19 +1,11 @@
 package com.cm.persistence.jpa;
 
 import com.cm.domain.model.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import com.cm.persistence.EntityRepository;
 
-@Repository("com.cm.persistence.jpa.UserRepositoryJPA")
-@Transactional
-public class UserRepositoryJPA extends EntityRepositoryJPA<User, Long> {
+import java.util.List;
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(UserRepositoryJPA.class);
+public interface UserRepositoryJPA extends EntityRepository<User, Long> {
 
-    @Override
-    protected Class getActualClass() {
-        return User.class;
-    }
+    List<User> findByType(User.UserTypes type);
 }

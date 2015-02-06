@@ -23,7 +23,7 @@ CREATE TABLE CM_T_COINS (
 -- Populate CM_T_USERS table
 CREATE TABLE CM_T_USERS (
     ID          INTEGER       not null,
-    TYPE        VARCHAR2(30)  not null,
+    TYPE        NUMBER(1)     not null,
     EMAIL       VARCHAR2(255) not null,
     CREATEDAT   TIMESTAMP     not null,
     ROWSTATUS   NUMBER(1)     not null,

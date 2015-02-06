@@ -2,7 +2,7 @@ package com.cm.service;
 
 import com.cm.domain.model.Coin;
 import com.cm.persistence.jpa.CoinRepositoryJPA;
-import com.cm.helpers.MailHelper;
+import com.cm.helpers.EmailHelper;
 import com.cm.helpers.CoinPriceRuleHelper;
 import com.cm.util.CmGenericException;
 import com.cm.util.GradePriceFileReader;
@@ -28,53 +28,14 @@ public class CoinService {
     private CoinPriceRuleHelper priceRuleRunner;
 
     @Autowired
-    private MailHelper mailProcessor;
+    private EmailHelper mailProcessor;
 
     public CoinService() {
     }
 
-    public void processNewCoin(Coin coin) throws CmGenericException {
+    public void checkCoinParameters(Coin coin) throws CmGenericException {
         Assert.notNull(coin, "method was invoked with null arg");
 
-        checkCoinParameters(coin);
-
-        priceRuleRunner.execute(coin);
-
-        processCoinPrice(coin);
-
-        saveCoin(coin);
-
-        mailProcessor.sendMail("com.cm.automailer@gmail.com", "kalko.ev@gmail.com", "Coin test 001", coin.toString());
-    }
-
-    private void processCoinPrice(Coin coin) throws CmGenericException {
-        if (coin.getPrice() != null) {
-            LOGGER.debug("Price for coin has been successfully estimated");
-            return;
-        }
-
-        if (coin.getRawPrice() != null) {
-            calculateByGrade(coin);
-            LOGGER.debug("Price for coin has been successfully estimated");
-        } else {
-            processCoinWithoutPrice(coin);
-            LOGGER.debug("Cannot estimate price for coin");
-        }
-    }
-
-    private void processCoinWithoutPrice(Coin coin) {
-
-    }
-
-    private void calculateByGrade(Coin coin) throws CmGenericException {
-        BigDecimal rawPrice = coin.getRawPrice();
-        BigDecimal multiplier = GradePriceFileReader.getInstance().getGradeMultiplier(coin.getGrade());
-        BigDecimal price = rawPrice.multiply(multiplier);
-
-        coin.setPrice(price);
-    }
-
-    private void checkCoinParameters(Coin coin) throws CmGenericException {
         if(coin.getComposition() == null) {
             LOGGER.warn("An error occurred during processing new coin - required field 'Composition' is missing. Skipping...");
             throw new CmGenericException();
@@ -90,7 +51,51 @@ public class CoinService {
         }
     }
 
-    private void saveCoin(Coin coin) {
+    public boolean calculatePrice(Coin coin) throws CmGenericException {
+        Assert.notNull(coin, "method was invoked with null arg");
+
+        priceRuleRunner.execute(coin);
+
+        if (coin.getPrice() != null) {
+            LOGGER.debug("Price for coin has been successfully estimated");
+
+            return true;
+        }
+
+        if (coin.getRawPrice() != null) {
+            calculateByGrade(coin);
+
+            LOGGER.debug("Price for coin has been successfully estimated");
+
+            return true;
+        } else {
+            LOGGER.debug("Cannot estimate price for coin");
+
+            return false;
+        }
+    }
+
+    public void processNewCoin(Coin coin) throws CmGenericException {
+        Assert.notNull(coin, "method was invoked with null arg");
+
+        checkCoinParameters(coin);
+
+        priceRuleRunner.execute(coin);
+
+        saveCoin(coin);
+
+        mailProcessor.sendMail("com.cm.automailer@gmail.com", "kalko.ev@gmail.com", "Coin test 001", coin.toString());
+    }
+
+    private void calculateByGrade(Coin coin) throws CmGenericException {
+        BigDecimal rawPrice = coin.getRawPrice();
+        BigDecimal multiplier = GradePriceFileReader.getInstance().getGradeMultiplier(coin.getGrade());
+        BigDecimal price = rawPrice.multiply(multiplier);
+
+        coin.setPrice(price);
+    }
+
+    public void saveCoin(Coin coin) {
         coinRepositoryJPA.create(coin);
     }
 }

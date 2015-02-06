@@ -11,8 +11,6 @@ public interface EntityRepository<Type, PK extends Serializable> {
 
     Type find(PK id);
 
-    Type find(Criteria criteria);
-
     void create(Type entity);
 
     Type update(Type entity);

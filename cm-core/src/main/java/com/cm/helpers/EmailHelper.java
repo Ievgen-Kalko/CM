@@ -6,7 +6,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
 @Component("com.cm.helpers.MailProcessor")
-public class MailHelper {
+public class EmailHelper {
 
     @Autowired
     private MailSender mailSender;

@@ -2,9 +2,7 @@ package com.cm.domain.model;
 
 import com.cm.domain.AbstractAuditableEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Ievgen on 2/4/2015.
@@ -33,7 +31,8 @@ public class User extends AbstractAuditableEntity {
     }
 
     @Column(name = "TYPE")
-    private String type;
+    @Enumerated(EnumType.ORDINAL)
+    private UserTypes type;
 
     @Column(name = "EMAIL")
     private String email;
@@ -41,7 +40,7 @@ public class User extends AbstractAuditableEntity {
     public User() {
     }
 
-    public String getType() {
+    public UserTypes getType() {
         return type;
     }
 
@@ -49,11 +48,26 @@ public class User extends AbstractAuditableEntity {
         return email;
     }
 
-    public void setType(String type) {
+    public void setType(UserTypes type) {
         this.type = type;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public static enum UserTypes {
+        CLIENT(0L),
+        ADMIN(1L);
+
+        private final long value;
+
+        private UserTypes(final long value) {
+            this.value = value;
+        }
+
+        public long getValue() {
+            return this.value;
+        }
     }
 }

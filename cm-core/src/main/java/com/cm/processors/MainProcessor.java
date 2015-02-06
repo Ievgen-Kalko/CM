@@ -23,7 +23,7 @@ public class MainProcessor {
         LOGGER.info("************** BEGINNING PROGRAM **************");
 
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
-        CoinService coinService = (CoinService) context.getBean("com.cm.service.coinService");
+        CoinProcessor coinProcessor = (CoinProcessor) context.getBean("com.cm.processors.CoinProcessor");
 
         MainProcessor mainProcessor = (MainProcessor) context.getBean("mainProcessor");
 
@@ -33,15 +33,9 @@ public class MainProcessor {
         coin.setCountry("US");
         coin.setDescription("Test 001");
         coin.setGrade(Coin.GradeType.VERY_FINE);
-        coin.setYear(1935);
+        coin.setYear(935);
 
-        try {
-            coinService.processNewCoin(coin);
-        } catch (CmGenericException e) {
-            //TODO - Write coin's parameters
-            LOGGER.error("Error occurred during processing new coin");
-            throw e;
-        }
+        coinProcessor.processNewCoin(coin);
 
         LOGGER.info("************** ENDING PROGRAM *****************");
     }

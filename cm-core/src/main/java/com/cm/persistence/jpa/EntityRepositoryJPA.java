@@ -5,7 +5,9 @@ import com.cm.persistence.EntityRepository;
 import org.hibernate.Criteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -38,24 +40,6 @@ public abstract class EntityRepositoryJPA<Type extends JPAEntity<PK>, PK extends
     }
 
     @Override
-    public Type find(Criteria criteria) {
-        Assert.notNull(criteria, "criteria");
-
-        TypedQuery<Type> query = getTypedQuery(criteria);
-
-        query.setMaxResults(1);
-
-        Type entity;
-        try {
-            entity = query.getSingleResult();
-        } catch (NoResultException e) {
-            entity = null;
-            LOGGER.info(e.getMessage());
-        }
-        return entity;
-    }
-
-    @Override
     public void create(Type entity) {
         entityManager.persist(entity);
     }
@@ -82,9 +66,4 @@ public abstract class EntityRepositoryJPA<Type extends JPAEntity<PK>, PK extends
     }
 
     protected abstract Class getActualClass();
-
-    private TypedQuery<Type> getTypedQuery(Criteria criteria) {
-        // TODO - Decide sth
-        return null;
-    }
 }

@@ -66,8 +66,8 @@ public class Email extends AbstractAuditableEntity {
     }
 
     public enum SentStatus {
-        SUCCESSFULLY_DELIVERED(0L),
-        DELIVERY_FAILED(1L);
+        DELIVERY_FAILED(0L),
+        SUCCESSFULLY_SENT(1L);
 
         private long value;
 
