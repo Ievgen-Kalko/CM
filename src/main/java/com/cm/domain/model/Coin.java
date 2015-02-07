@@ -135,7 +135,6 @@ public class Coin extends AbstractAuditableEntity {
     @Override
     public String toString() {
         return "Coin: [" +
-                "Composition: " + getComposition().toString() +
                 ", Country: " + getCountry() +
                 ", Year: " + getYear() +
                 ", Grade: " + getGrade().toString() +
