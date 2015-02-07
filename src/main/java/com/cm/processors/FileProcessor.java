@@ -33,8 +33,6 @@ public class FileProcessor {
      * @throws CmGenericException
      */
     public List<File> getFiles() throws CmGenericException {
-        Assert.notNull(INPUT_FILES_PATH, "method was invoked with null arg");
-
         List<File> files = new ArrayList<>();
 
         try {
@@ -139,4 +137,6 @@ public class FileProcessor {
             }
         }
     }
+
+
 }
