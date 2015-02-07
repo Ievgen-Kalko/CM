@@ -18,6 +18,10 @@ public class CoinPriceRuleHelper {
     public CoinPriceRuleHelper() {
     }
 
+    /**
+     * Execute rule (if any) linked with (@link coin)
+     * @param coin
+     */
     public void execute(Coin coin) {
         Assert.notNull(coin, "method was invoked with null arg");
 

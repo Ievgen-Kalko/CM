@@ -40,6 +40,12 @@ public class CoinProcessor {
     public CoinProcessor() {
     }
 
+    /**
+     * Do all operations required when new coin is received,
+     * including: Verification, Price calculation, Persisting
+     * @param coin
+     * @throws CmGenericException
+     */
     public void processNewCoin(Coin coin) throws CmGenericException {
         Assert.notNull(coin, "method was invoked with null arg");
 

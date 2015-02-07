@@ -28,6 +28,11 @@ public class FileProcessor {
     public FileProcessor() {
     }
 
+    /**
+     * Returns list of files (if any) from the INBOX directory
+     * @return list of files (if any) from the INBOX directory
+     * @throws CmGenericException
+     */
     public List<File> getFiles() throws CmGenericException {
         Assert.notNull(INPUT_FILES_PATH, "method was invoked with null arg");
 
@@ -47,6 +52,14 @@ public class FileProcessor {
         return files;
     }
 
+    /**
+     * Moves (@link file) from current location to the (@link newPath).
+     * Also it can rename it is such file in target directory is already exist
+     * @param file
+     * @param newPath
+     * @return moved (@link file)
+     * @throws CmGenericException
+     */
     public File moveFile(File file, String newPath) throws CmGenericException {
         Assert.notNull(file, "method was invoked with null arg");
         Assert.notNull(newPath, "method was invoked with null arg");
@@ -81,18 +94,39 @@ public class FileProcessor {
         return new File(newName);
     }
 
+    /**
+     * Moves current file to the OUTBOX directory
+     * @param file
+     * @return moved (@link file)
+     * @throws CmGenericException
+     */
     public File moveFileToOutboxDir(File file) throws CmGenericException {
         return moveFile(file, OUTPUT_FILES_PATH);
     }
 
+    /**
+     * Moves current file to the ERROR directory
+     * @param file
+     * @return moved (@link file)
+     * @throws CmGenericException
+     */
     public File moveFileToErrorDir(File file) throws CmGenericException {
         return moveFile(file, ERROR_FILES_PATH);
     }
 
+    /**
+     * Moves current file to the PROCESSING directory
+     * @param file
+     * @return moved (@link file)
+     * @throws CmGenericException
+     */
     public File moveFileToProcessingDir(File file) throws CmGenericException {
         return moveFile(file, PROCESSING_FILES_PATH);
     }
 
+    /**
+     * Creates required directories
+     */
     public void createDirectories() {
         List<File> directories = new ArrayList<File>(4);
         directories.add(new File(INPUT_FILES_PATH));

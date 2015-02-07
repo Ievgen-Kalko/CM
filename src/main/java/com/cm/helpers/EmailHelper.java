@@ -15,6 +15,13 @@ public class EmailHelper {
         this.mailSender = mailSender;
     }
 
+    /**
+     * Tries to send (@link email)
+     * @param from
+     * @param to
+     * @param subject
+     * @param msg
+     */
     public void sendMail(String from, String to, String subject, String msg) {
         SimpleMailMessage message = new SimpleMailMessage();
 

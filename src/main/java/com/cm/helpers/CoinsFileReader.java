@@ -19,6 +19,12 @@ public class CoinsFileReader {
     public CoinsFileReader() {
     }
 
+    /**
+     * Unmarshalls (@link Coin) from (@link file)
+     * @param file
+     * @return
+     * @throws CmGenericException
+     */
     public Coin unmarshall(File file) throws CmGenericException {
         Coin coin = null;
 
