@@ -14,7 +14,6 @@ import java.io.File;
 import java.util.List;
 
 @Component("mainProcessor")
-@Transactional
 public class MainProcessor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(MainProcessor.class);
@@ -52,23 +51,24 @@ public class MainProcessor {
                 if (files.size() > 0) {
                     for (File file : files) {
                         try {
+                            file = fileProcessor.moveFileToProcessingDir(file);
                             coinProcessor.processNewCoin(coinsFileReader.unmarshall(file));
                             fileProcessor.moveFileToOutboxDir(file);
-                        } catch (CmGenericException e) {
+                        } catch (Throwable e) {
                             fileProcessor.moveFileToErrorDir(file);
-                            LOGGER.error("Failed to process coin from file [" + file.getName() + "]");
+                            LOGGER.error("Failed to process coin from file [" + file.getName() + "]", e);
                         }
                     }
                 }
-            } catch (CmGenericException e) {
-                LOGGER.error("Failed to read files from inbox folder or move files to error folder");
+            } catch (Throwable e) {
+                LOGGER.error("Failed to read files from inbox folder or move files to error folder", e);
             }
 
             try {
                 LOGGER.debug("Searching for incoming files...");
                 Thread.sleep(WAITING_INTERVAL);
             } catch (InterruptedException e) {
-                LOGGER.debug("Interrupted exception occurred.");
+                LOGGER.debug("Interrupted exception occurred.", e);
             }
         }
     }

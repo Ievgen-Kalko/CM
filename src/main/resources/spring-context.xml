@@ -50,7 +50,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com" />
         <property name="port" value="587" />
-        <property name="username" value="com.cm.automailer222@gmail.com" />
+        <property name="username" value="com.cm.automailer@gmail.com" />
         <property name="password" value="10Fk9spGG" />
 
         <property name="javaMailProperties">

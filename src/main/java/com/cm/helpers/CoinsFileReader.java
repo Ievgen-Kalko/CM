@@ -29,7 +29,7 @@ public class CoinsFileReader {
             coin = (Coin) jaxbUnmarshaller.unmarshal(file);
 
         } catch (JAXBException e) {
-            LOGGER.error("Cannot unmarshall file [" + file.getName() + "]");
+            LOGGER.error("Cannot unmarshall file [" + file.getName() + "]", e);
             throw new CmGenericException("Cannot unmarshall file [" + file.getName() + "]", e);
         }
 

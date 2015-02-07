@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -72,10 +73,10 @@ public class EmailServiceImpl implements EmailService {
             emailHelper.sendMail(SYSTEM_EMAIL_ADDRESS, email.getEmail(), EMAIL_SUBJECT, email.getBody());
             email.setSentStatus(Email.SentStatus.SUCCESSFULLY_SENT);
         } catch (Exception e) {
-            LOGGER.info("Cannot sent email to " + email.getEmail() +
-                    " It will be persisted to DB with status 'DELIVERY_FAILED'");
             email.setSentStatus(Email.SentStatus.DELIVERY_FAILED);
+            LOGGER.warn("Cannot send e-mail", e);
         }
+
     }
 
     @Override

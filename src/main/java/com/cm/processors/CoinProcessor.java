@@ -40,7 +40,7 @@ public class CoinProcessor {
     public CoinProcessor() {
     }
 
-    public void processNewCoin(Coin coin) {
+    public void processNewCoin(Coin coin) throws CmGenericException {
         Assert.notNull(coin, "method was invoked with null arg");
 
         try {
@@ -55,6 +55,7 @@ public class CoinProcessor {
             }
         } catch (CmGenericException e) {
             LOGGER.error("Cannot process new coin", e);
+            throw e;
         }
 
     }

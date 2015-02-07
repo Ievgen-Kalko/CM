@@ -1,11 +1,13 @@
 package com.cm.domain.model;
 
 import com.cm.domain.AbstractAuditableEntity;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Table(name = "CM_T_COINS")

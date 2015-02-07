@@ -75,7 +75,7 @@ public class CoinProcessorTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenNullArgumentPassedToProcessNewCoin_thenExceptionIsThrown() {
+    public void whenNullArgumentPassedToProcessNewCoin_thenExceptionIsThrown() throws CmGenericException {
         coinProcessor.processNewCoin(null);
     }
 

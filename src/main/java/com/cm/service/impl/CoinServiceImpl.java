@@ -28,9 +28,6 @@ public class CoinServiceImpl implements CoinService {
     @Autowired
     private CoinPriceRuleHelper priceRuleRunner;
 
-    @Autowired
-    private EmailHelper mailProcessor;
-
     public CoinServiceImpl() {
     }
 
