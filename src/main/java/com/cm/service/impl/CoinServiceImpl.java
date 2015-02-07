@@ -38,7 +38,7 @@ public class CoinServiceImpl implements CoinService {
         if(coin.getComposition() == null) {
             LOGGER.warn("An error occurred during processing new coin - required field 'Composition' is missing. Skipping...");
             throw new CmGenericException();
-        } else if(coin.getCountry().isEmpty()) {
+        } else if(coin.getCountry() == null || coin.getCountry().isEmpty()) {
             LOGGER.warn("An error occurred during processing new coin - required field 'Country' is missing. Skipping...");
             throw new CmGenericException();
         } else if(coin.getYear() == 0L) {
