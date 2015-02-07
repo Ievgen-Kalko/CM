@@ -2,19 +2,12 @@ package com.cm.persistence.jpa;
 
 import com.cm.domain.JPAEntity;
 import com.cm.persistence.EntityRepository;
-import org.hibernate.Criteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.io.Serializable;
 
 public abstract class EntityRepositoryJPA<Type extends JPAEntity<PK>, PK extends Serializable> implements EntityRepository<Type, PK> {

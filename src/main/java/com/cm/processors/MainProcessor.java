@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.util.List;
 
 @Component("mainProcessor")
+@Transactional
 public class MainProcessor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(MainProcessor.class);

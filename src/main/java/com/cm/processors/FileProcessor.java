@@ -4,6 +4,8 @@ import com.cm.util.CmGenericException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component("com.cm.processors.FileProcessor")
+@Transactional
 public class FileProcessor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(FileProcessor.class);
@@ -21,6 +24,8 @@ public class FileProcessor {
     }
 
     public List<File> getFiles(String path) throws CmGenericException {
+        Assert.notNull(path, "method was invoked with null arg");
+
         List<File> files = new ArrayList<>();
 
         try {
@@ -38,6 +43,9 @@ public class FileProcessor {
     }
 
     public void moveFile(File file, String newPath) throws CmGenericException {
+        Assert.notNull(file, "method was invoked with null arg");
+        Assert.notNull(newPath, "method was invoked with null arg");
+
         try{
             boolean isMoved = file.renameTo(new File(newPath + file.getName()));
 

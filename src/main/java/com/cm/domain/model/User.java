@@ -4,9 +4,6 @@ import com.cm.domain.AbstractAuditableEntity;
 
 import javax.persistence.*;
 
-/**
- * Created by Ievgen on 2/4/2015.
- */
 @Entity
 @Table(name = "CM_T_USERS", schema = "CM", catalog = "")
 public class User extends AbstractAuditableEntity {

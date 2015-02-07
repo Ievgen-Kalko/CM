@@ -1,26 +1,20 @@
 package com.cm.persistence.jpa.impl;
 
-import com.cm.domain.model.Subscription;
 import com.cm.domain.model.User;
 import com.cm.persistence.jpa.EntityRepositoryJPA;
 import com.cm.persistence.jpa.UserRepositoryJPA;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.util.HashSet;
 import java.util.List;
 
 @Repository("com.cm.persistence.jpa.UserRepositoryJPA")
 @Transactional
 public class UserRepositoryJPAImpl extends EntityRepositoryJPA<User, Long> implements UserRepositoryJPA {
-
-    private final static Logger LOGGER = LoggerFactory.getLogger(UserRepositoryJPAImpl.class);
 
     public UserRepositoryJPAImpl() {
     }
