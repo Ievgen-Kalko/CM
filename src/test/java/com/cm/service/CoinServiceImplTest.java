@@ -6,7 +6,6 @@ import com.cm.helpers.EmailHelper;
 import com.cm.persistence.jpa.CoinRepositoryJPA;
 import com.cm.service.impl.CoinServiceImpl;
 import com.cm.util.CmGenericException;
-import com.cm.util.GradePriceFileReader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,12 +14,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
 
-import static com.sun.javaws.JnlpxArgs.verify;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
-import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CoinServiceImplTest {
