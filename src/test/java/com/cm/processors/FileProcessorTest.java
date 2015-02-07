@@ -15,11 +15,6 @@ public class FileProcessorTest {
     private FileProcessor fileProcessor;
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenNullArgumentPassedToGetFiles_thenExceptionIsThrown() throws CmGenericException {
-        fileProcessor.getFiles(null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
     public void whenFirstArgumentPassedToMoveFileIsNull_thenExceptionIsThrown() throws CmGenericException {
         fileProcessor.moveFile(null, "");
     }

@@ -19,9 +19,6 @@ public class MainProcessor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(MainProcessor.class);
 
-    private final static String INPUT_FILES_PATH = "./cm-core/src/main/resources/inbox";
-    private final static String OUTPUT_FILES_PATH = "./cm-core/src/main/resources/outbox/";
-    private final static String ERROR_FILES_PATH = "./cm-core/src/main/resources/error/";
     private final static long WAITING_INTERVAL = 10000;
 
     @Autowired
@@ -46,17 +43,19 @@ public class MainProcessor {
     }
 
     public void start() {
+        fileProcessor.createDirectories();;
+
         while(true) {
             try {
-                List<File> files = fileProcessor.getFiles(INPUT_FILES_PATH);
+                List<File> files = fileProcessor.getFiles();
 
                 if (files.size() > 0) {
                     for (File file : files) {
                         try {
                             coinProcessor.processNewCoin(coinsFileReader.unmarshall(file));
-                            fileProcessor.moveFile(file, OUTPUT_FILES_PATH);
+                            fileProcessor.moveFileToOutboxDir(file);
                         } catch (CmGenericException e) {
-                            fileProcessor.moveFile(file, ERROR_FILES_PATH);
+                            fileProcessor.moveFileToErrorDir(file);
                             LOGGER.error("Failed to process coin from file [" + file.getName() + "]");
                         }
                     }

@@ -20,16 +20,20 @@ public class FileProcessor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(FileProcessor.class);
 
+    private final static String INPUT_FILES_PATH = "./inbox";
+    private final static String OUTPUT_FILES_PATH = "./outbox/";
+    private final static String ERROR_FILES_PATH = "./error/";
+
     public FileProcessor() {
     }
 
-    public List<File> getFiles(String path) throws CmGenericException {
-        Assert.notNull(path, "method was invoked with null arg");
+    public List<File> getFiles() throws CmGenericException {
+        Assert.notNull(INPUT_FILES_PATH, "method was invoked with null arg");
 
         List<File> files = new ArrayList<>();
 
         try {
-            Files.walk(Paths.get(path)).forEach(filePath -> {
+            Files.walk(Paths.get(INPUT_FILES_PATH)).forEach(filePath -> {
                 if (Files.isRegularFile(filePath)) {
                     files.add(filePath.toFile());
                 }
@@ -55,6 +59,27 @@ public class FileProcessor {
         }catch(Exception e){
             LOGGER.warn("Error occurred while trying to move file [" + file.getName() + "] to [" + newPath + "].");
             throw new CmGenericException("Error occurred while trying to move file [" + file.getName() + "] to [" + newPath + "].", e);
+        }
+    }
+
+    public void moveFileToOutboxDir(File file) throws CmGenericException {
+        moveFile(file, OUTPUT_FILES_PATH);
+    }
+
+    public void moveFileToErrorDir(File file) throws CmGenericException {
+        moveFile(file, ERROR_FILES_PATH);
+    }
+
+    public void createDirectories() {
+        List<File> directories = new ArrayList<File>(3);
+        directories.add(new File(INPUT_FILES_PATH));
+        directories.add(new File(OUTPUT_FILES_PATH));
+        directories.add(new File(ERROR_FILES_PATH));
+
+        for(File dir : directories) {
+            if(!dir.exists()) {
+                dir.mkdir();
+            }
         }
     }
 }
