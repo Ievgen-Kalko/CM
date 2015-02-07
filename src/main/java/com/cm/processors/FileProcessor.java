@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component("com.cm.processors.FileProcessor")
-@Transactional
 public class FileProcessor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(FileProcessor.class);

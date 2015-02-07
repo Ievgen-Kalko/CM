@@ -45,7 +45,7 @@ public class MainProcessor {
      * Starts program
      */
     public void start() {
-        fileProcessor.createDirectories();;
+        fileProcessor.createDirectories();
 
         while(true) {
             try {
