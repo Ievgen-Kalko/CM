@@ -1,7 +1,5 @@
 package com.cm.service;
 
-import com.cm.domain.model.Coin;
-import com.cm.domain.model.Email;
 import com.cm.persistence.jpa.SubscriptionRepositoryJPA;
 import com.cm.service.impl.SubscriptionServiceImpl;
 import org.junit.Test;
@@ -9,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;

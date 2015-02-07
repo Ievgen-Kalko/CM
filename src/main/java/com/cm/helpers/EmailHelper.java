@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 @Component("com.cm.helpers.MailProcessor")
 public class EmailHelper {
@@ -23,6 +24,11 @@ public class EmailHelper {
      * @param msg
      */
     public void sendMail(String from, String to, String subject, String msg) {
+        Assert.notNull(from, "method was invoked with null arg");
+        Assert.notNull(to, "method was invoked with null arg");
+        Assert.notNull(subject, "method was invoked with null arg");
+        Assert.notNull(msg, "method was invoked with null arg");
+
         SimpleMailMessage message = new SimpleMailMessage();
 
         message.setFrom(from);

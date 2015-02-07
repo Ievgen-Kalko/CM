@@ -5,6 +5,7 @@ import com.cm.util.CmGenericException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -26,6 +27,8 @@ public class CoinsFileReader {
      * @throws CmGenericException
      */
     public Coin unmarshall(File file) throws CmGenericException {
+        Assert.notNull(file, "method was invoked with null arg");
+
         Coin coin = null;
 
         try {
