@@ -13,12 +13,3 @@ And its parameter year is 1907
 And its parameter grade is VERY_FINE
 When the price is calculated
 Then the price should be 2750000
-
-Scenario:  Stack search
-
-Given an empty stack
-When the string Java is added
-And the string C++ is added
-And the string PHP is added
-And the element Java is searched for
-Then the position returned should be 3
