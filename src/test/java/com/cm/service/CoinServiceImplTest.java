@@ -84,7 +84,7 @@ public class CoinServiceImplTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenCalculatePriceInvokedWithNullArg_thenExceptionShouldBeThrown() throws CmGenericException {
-        coinService.calculatePrice(null);
+        coinService.tryToCalculatePrice(null);
     }
 
     @Test
@@ -98,7 +98,7 @@ public class CoinServiceImplTest {
         coin.setPrice(new BigDecimal(12));
 
         boolean expectedStatus = true;
-        boolean actualStatus = coinService.calculatePrice(coin);
+        boolean actualStatus = coinService.tryToCalculatePrice(coin);
 
         BigDecimal expectedPrice = new BigDecimal(12);
         BigDecimal actualPrice = coin.getPrice();
@@ -118,7 +118,7 @@ public class CoinServiceImplTest {
         coin.setRawPrice(new BigDecimal(23));
 
         boolean expectedStatus = true;
-        boolean actualStatus = coinService.calculatePrice(coin);
+        boolean actualStatus = coinService.tryToCalculatePrice(coin);
 
         assertTrue(expectedStatus == actualStatus);
         assertNotNull(coin.getPrice());
@@ -134,7 +134,7 @@ public class CoinServiceImplTest {
         coin.setGrade(Coin.GradeType.EXTRA_FINE);
 
         boolean expectedStatus = false;
-        boolean actualStatus = coinService.calculatePrice(coin);
+        boolean actualStatus = coinService.tryToCalculatePrice(coin);
 
         assertTrue(expectedStatus == actualStatus);
         assertNull(coin.getPrice());

@@ -1,9 +1,8 @@
 package com.cm.service.impl;
 
 import com.cm.domain.model.Coin;
-import com.cm.persistence.jpa.CoinRepositoryJPA;
-import com.cm.helpers.EmailHelper;
 import com.cm.helpers.CoinPriceRuleHelper;
+import com.cm.persistence.jpa.CoinRepositoryJPA;
 import com.cm.service.CoinService;
 import com.cm.util.CmGenericException;
 import com.cm.util.GradePriceFileReader;
@@ -51,7 +50,7 @@ public class CoinServiceImpl implements CoinService {
     }
 
     @Override
-    public boolean calculatePrice(Coin coin) throws CmGenericException {
+    public boolean tryToCalculatePrice(Coin coin) throws CmGenericException {
         Assert.notNull(coin, "method was invoked with null arg");
 
         priceRuleRunner.execute(coin);

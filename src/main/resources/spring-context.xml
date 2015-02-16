@@ -71,6 +71,13 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
         </property>
     </bean>
 
+    <bean id="emailComposerFactory" class="org.springframework.beans.factory.config.ServiceLocatorFactoryBean">
+        <property name="serviceLocatorInterface" value="com.cm.helpers.factory.mail.EmailComposerFactory" />
+    </bean>
+
+    <alias name="com.cm.helpers.factory.mail.EmailComposerForClient" alias="CLIENT"/>
+    <alias name="com.cm.helpers.factory.mail.EmailComposerForAdmin" alias="ADMIN"/>
+
     <import resource="rules-context.xml"/>
 
 </beans>

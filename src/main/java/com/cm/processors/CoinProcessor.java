@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -51,7 +52,7 @@ public class CoinProcessor {
 
         try {
             coinService.checkCoinParameters(coin);
-            boolean priceCalculated = coinService.calculatePrice(coin);
+            boolean priceCalculated = coinService.tryToCalculatePrice(coin);
             coinService.saveCoin(coin);
 
             if (priceCalculated) {
@@ -68,33 +69,43 @@ public class CoinProcessor {
 
     private void processEmailForClient(Coin coin) {
         Set<Subscription> subscriptions = null;
+        List<String> emailAddresses = null;
+        Email email = null;
 
         subscriptions = subscriptionService.getSubscriptions(coin.getCountry());
-        Email email = null;
+        emailAddresses = new ArrayList<>(subscriptions.size());
 
         if (subscriptions.size() > 0) {
             for (Subscription subscription : subscriptions) {
-                email = emailService.composeEmailForClient(coin, subscription.getUserId().getEmail());
-                emailService.sendEmail(email);
-                emailService.saveEmail(email);
+                emailAddresses.add(subscription.getUserId().getEmail());
             }
+
+            email = emailService.composeEmail(coin, emailAddresses, User.UserTypes.CLIENT);
+            emailService.sendEmail(email);
+            emailService.saveEmail(email);
         } else {
-            LOGGER.info("Cannot find subscribers for country: " + coin.getCountry());
+            LOGGER.debug("Cannot find subscribers for country: " + coin.getCountry());
         }
     }
 
     private void processEmailForAdmin(Coin coin) {
         List<User> users = null;
+        List<String> emailAddresses = null;
+        Email email = null;
 
         users = userService.getUsersByType(User.UserTypes.ADMIN);
-        Email email = null;
+        emailAddresses = new ArrayList<>(users.size());
 
         if (users.size() > 0) {
             for (User user : users) {
-                email = emailService.composeEmailForAdmin(coin, user.getEmail());
-                emailService.sendEmail(email);
-                emailService.saveEmail(email);
+                emailAddresses.add(user.getEmail());
             }
+
+            email = emailService.composeEmail(coin, emailAddresses, User.UserTypes.ADMIN);
+            emailService.sendEmail(email);
+            emailService.saveEmail(email);
+        } else {
+            LOGGER.debug("Cannot find any admin in the database");
         }
     }
 }

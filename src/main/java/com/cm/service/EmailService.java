@@ -2,24 +2,20 @@ package com.cm.service;
 
 import com.cm.domain.model.Coin;
 import com.cm.domain.model.Email;
+import com.cm.domain.model.User;
+
+import java.util.List;
 
 public interface EmailService {
 
     /**
-     * Creates email for client
+     * Creates email for appropriate user type
      * @param coin
-     * @param emailAddress
+     * @param emailAddresses
+     * @param userType
      * @return newly created email
      */
-    Email composeEmailForClient(Coin coin, String emailAddress);
-
-    /**
-     * Creates email for admin
-     * @param coin
-     * @param emailAddress
-     * @return newly created email
-     */
-    Email composeEmailForAdmin(Coin coin, String emailAddress);
+    Email composeEmail(Coin coin, List<String> emailAddresses, User.UserTypes userType);
 
     /**
      * Sends email

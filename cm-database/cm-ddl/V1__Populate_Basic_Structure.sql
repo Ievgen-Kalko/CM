@@ -35,7 +35,9 @@ CREATE UNIQUE INDEX CM_T_USERS_EMAIL_IDX ON CM_T_USERS (EMAIL);
 -- Populate CM_T_EMAILS table
 CREATE TABLE CM_T_EMAILS (
     ID          INTEGER       not null,
-    EMAIL       VARCHAR2(255) not null,
+    FROM_       VARCHAR2(255) not null,
+    TO_         CLOB          not null,
+    SUBJECT     VARCHAR2(255) not null,
     BODY        CLOB          not null,
     SENT        NUMBER(1)     not null,
     CREATEDAT   TIMESTAMP     not null,

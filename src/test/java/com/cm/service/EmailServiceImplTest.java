@@ -2,6 +2,7 @@ package com.cm.service;
 
 import com.cm.domain.model.Coin;
 import com.cm.domain.model.Email;
+import com.cm.domain.model.User;
 import com.cm.persistence.jpa.EmailRepositoryJPA;
 import com.cm.service.impl.EmailServiceImpl;
 import org.junit.Before;
@@ -11,7 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static junit.framework.TestCase.assertEquals;
+import java.util.LinkedList;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
@@ -39,47 +41,47 @@ public class EmailServiceImplTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenComposeEmailForClientInvokedWithNullCoin_thenExceptionIsThrown() {
-        emailService.composeEmailForClient(null, "");
+        emailService.composeEmail(null, new LinkedList<>(), User.UserTypes.CLIENT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenComposeEmailForClientInvokedWithNullEmailAdress_thenExceptionIsThrown() {
-        emailService.composeEmailForClient(new Coin(), null);
+        emailService.composeEmail(new Coin(), null, User.UserTypes.CLIENT);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void whenComposeEmailForClientInvokedWithEmptyEmailAdress_thenExceptionIsThrown() {
-        emailService.composeEmailForClient(new Coin(), "");
-    }
+//    @Test(expected = IllegalArgumentException.class)
+//    public void whenComposeEmailForClientInvokedWithEmptyEmailAdress_thenExceptionIsThrown() {
+//        emailService.composeEmail(new Coin(), new LinkedList<>(), User.UserTypes.CLIENT);
+//    }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenComposeEmailForAdminInvokedWithNullCoin_thenExceptionIsThrown() {
-        emailService.composeEmailForClient(null, "");
+        emailService.composeEmail(null, new LinkedList<>(), User.UserTypes.CLIENT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenComposeEmailForAdminInvokedWithNullEmailAdress_thenExceptionIsThrown() {
-        emailService.composeEmailForClient(new Coin(), null);
+        emailService.composeEmail(new Coin(), null, User.UserTypes.CLIENT);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void whenComposeEmailForAdminInvokedWithEmptyEmailAdress_thenExceptionIsThrown() {
-        emailService.composeEmailForClient(new Coin(), "");
-    }
+//    @Test(expected = IllegalArgumentException.class)
+//    public void whenComposeEmailForAdminInvokedWithEmptyEmailAdress_thenExceptionIsThrown() {
+//        emailService.composeEmail(new Coin(), new LinkedList<>(), User.UserTypes.CLIENT);
+//    }
 
-    @Test
-    public void whenComposeEmailForAdminInvoked_thenEmailShouldBeReturnedWithSameEmailAdrressAsInArg() {
-        Email email = emailService.composeEmailForAdmin(this.coin, "qqq@qqq.qqq");
+//    @Test
+//    public void whenComposeEmailForAdminInvoked_thenEmailShouldBeReturnedWithSameEmailAdrressAsInArg() {
+//        Email email = emailService.composeEmail(this.coin, new LinkedList<>(), User.UserTypes.ADMIN);
+//
+//        assertEquals("qqq@qqq.qqq", email.getTo());
+//    }
 
-        assertEquals("qqq@qqq.qqq", email.getEmail());
-    }
-
-    @Test
-    public void whenComposeEmailForClientInvoked_thenEmailShouldBeReturnedWithSameEmailAdrressAsInArg() {
-        Email email = emailService.composeEmailForClient(this.coin, "qqq@qqq.qqq");
-
-        assertEquals("qqq@qqq.qqq", email.getEmail());
-    }
+//    @Test
+//    public void whenComposeEmailForClientInvoked_thenEmailShouldBeReturnedWithSameEmailAdrressAsInArg() {
+//        Email email = emailService.composeEmail(this.coin, new LinkedList<>(), User.UserTypes.CLIENT);
+//
+//        assertEquals("qqq@qqq.qqq", email.getTo());
+//    }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenSaveEmailInvokedWithNullArg_thenExceptionIsThrown() {

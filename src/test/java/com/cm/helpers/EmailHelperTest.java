@@ -1,12 +1,10 @@
 package com.cm.helpers;
 
-import com.cm.domain.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -25,7 +23,7 @@ public class EmailHelperTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenSendMilInvokedWithoutFromArg_thenExceptionIsThrown() {
-        emailHelper.sendMail(null, "", "", "");
+        emailHelper.sendMail(null, new String[]{"", ""}, "", "");
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -35,17 +33,17 @@ public class EmailHelperTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenSendMilInvokedWithoutSubjectArg_thenExceptionIsThrown() {
-        emailHelper.sendMail("", "", null, "");
+        emailHelper.sendMail("", new String[]{"", ""}, null, "");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenSendMilInvokedWithoutMsgArg_thenExceptionIsThrown() {
-        emailHelper.sendMail("", "", "", null);
+        emailHelper.sendMail("", new String[]{"", ""}, "", null);
     }
 
     @Test
     public void whenGetUserByTypeInvoked_thenUserRepositoryShouldInvoked() {
-        emailHelper.sendMail("", "", "", "");
+        emailHelper.sendMail("", new String[]{"", ""}, "", "");
 
         verify(mailSender, times(1)).send(any(SimpleMailMessage.class));
     }
