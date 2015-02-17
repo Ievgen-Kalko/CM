@@ -23,7 +23,7 @@ public class UserServiceImplTest {
     private UserRepositoryJPA userRepository;
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenGetUserByTypeInvokedWithNullArg_thenExceptionIsThrown() {
+    public void whenGetUserByTypeInvokedWithNullArgThenExceptionIsThrown() {
         userService.getUsersByType(null);
     }
 

@@ -3,15 +3,12 @@ package com.cm.helpers;
 import com.cm.domain.model.Coin;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
 
-import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNull;
 
@@ -27,7 +24,7 @@ public class CoinPriceRuleHelperTest {
     //Actually this is test for CoinPrice.xml rule, not for the class itself
 
     @Test
-    public void whenUSGold1907VeryFineCoinReceived_thenPrice2750000() {
+    public void whenUSGold1907VeryFineCoinReceivedThenPrice2750000() {
         coin.setCountry("US");
         coin.setYear(1907);
         coin.setGrade(Coin.GradeType.VERY_FINE);
@@ -42,7 +39,7 @@ public class CoinPriceRuleHelperTest {
     }
 
     @Test
-    public void whenRUOther1729VeryFineCoinReceived_thenPrice2500() {
+    public void whenRUOther1729VeryFineCoinReceivedThenPrice2500() {
         coin.setCountry("RU");
         coin.setYear(1729);
         coin.setGrade(Coin.GradeType.VERY_FINE);
@@ -57,7 +54,7 @@ public class CoinPriceRuleHelperTest {
     }
 
     @Test
-    public void whenRUOther1728ExtraFineCoinReceived_thenPrice3200() {
+    public void whenRUOther1728ExtraFineCoinReceivedThenPrice3200() {
         coin.setCountry("RU");
         coin.setYear(1728);
         coin.setGrade(Coin.GradeType.EXTRA_FINE);
@@ -75,7 +72,7 @@ public class CoinPriceRuleHelperTest {
     //Assuming: GOOD=1.1, VERY_GOOD=1.2, FINE=1.5, VERY_FINE=1.65, EXTRA_FINE=2.5
 
     @Test
-    public void whenUSSilver1123ExtraFineCoinReceived_thenPriceNotCalculated() {
+    public void whenUSSilver1123ExtraFineCoinReceivedThenPriceNotCalculated() {
         coin.setCountry("US");
         coin.setYear(1903);
         coin.setGrade(Coin.GradeType.EXTRA_FINE);

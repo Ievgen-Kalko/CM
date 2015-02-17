@@ -22,17 +22,17 @@ public class SubscriptionServiceImplTest {
     private SubscriptionRepositoryJPA subscriptionRepositoryJPA;
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenGetSubscriptionsInvokedWithNullArg_thenExceptionIsThrown() {
+    public void whenGetSubscriptionsInvokedWithNullArgThenExceptionIsThrown() {
         subscriptionService.getSubscriptions(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenGetSubscriptionsInvokedWithEmptyArg_thenExceptionIsThrown() {
+    public void whenGetSubscriptionsInvokedWithEmptyArgThenExceptionIsThrown() {
         subscriptionService.getSubscriptions("");
     }
 
     @Test
-    public void whenGetSubscriptionsInvoked_thenSubscriptionRepositoryShouldInvoked() {
+    public void whenGetSubscriptionsInvokedThenSubscriptionRepositoryShouldInvoked() {
         subscriptionService.getSubscriptions("sth");
 
         verify(subscriptionRepositoryJPA, times(1)).getSubscriptions(any(String.class));

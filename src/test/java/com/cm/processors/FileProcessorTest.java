@@ -36,17 +36,17 @@ public class FileProcessorTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenFirstArgumentPassedToMoveFileIsNull_thenExceptionIsThrown() throws CmGenericException {
+    public void whenFirstArgumentPassedToMoveFileIsNullThenExceptionIsThrown() throws CmGenericException {
         fileProcessor.moveFile(null, "");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenSecondArgumentPassedToMoveFileIsNull_thenExceptionIsThrown() throws CmGenericException {
+    public void whenSecondArgumentPassedToMoveFileIsNullThenExceptionIsThrown() throws CmGenericException {
         fileProcessor.moveFile(fileStub, null);
     }
 
     @Test
-    public void whenFileMoved_thenItsPathShouldBeChanged() throws CmGenericException {
+    public void whenFileMovedThenItsPathShouldBeChanged() throws CmGenericException {
         when(fileStub.renameTo(any(File.class))).thenReturn(true);
 
         String actualFileName = fileStub.getPath();
@@ -61,7 +61,7 @@ public class FileProcessorTest {
     }
 
     @Test
-    public void whenMoveToOutputDirInvoked_thenFilePathShouldBeChanged() throws CmGenericException {
+    public void whenMoveToOutputDirInvokedThenFilePathShouldBeChanged() throws CmGenericException {
         when(fileStub.renameTo(any(File.class))).thenReturn(true);
 
         String actualFileName = fileStub.getPath();
@@ -76,7 +76,7 @@ public class FileProcessorTest {
     }
 
     @Test
-    public void whenMoveToErrorDirInvoked_thenFilePathShouldBeChanged() throws CmGenericException {
+    public void whenMoveToErrorDirInvokedThenFilePathShouldBeChanged() throws CmGenericException {
         when(fileStub.renameTo(any(File.class))).thenReturn(true);
 
         String actualFileName = fileStub.getPath();
@@ -91,7 +91,7 @@ public class FileProcessorTest {
     }
 
     @Test
-    public void whenMoveToProcessingDirInvoked_thenFilePathShouldBeChanged() throws CmGenericException {
+    public void whenMoveToProcessingDirInvokedThenFilePathShouldBeChanged() throws CmGenericException {
         when(fileStub.renameTo(any(File.class))).thenReturn(true);
 
         String actualFileName = fileStub.getPath();

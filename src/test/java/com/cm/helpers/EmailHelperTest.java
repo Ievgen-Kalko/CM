@@ -22,27 +22,27 @@ public class EmailHelperTest {
     private MailSender mailSender;
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenSendMilInvokedWithoutFromArg_thenExceptionIsThrown() {
+    public void whenSendMilInvokedWithoutFromArgThenExceptionIsThrown() {
         emailHelper.sendMail(null, new String[]{"", ""}, "", "");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenSendMilInvokedWithoutToArg_thenExceptionIsThrown() {
+    public void whenSendMilInvokedWithoutToArgThenExceptionIsThrown() {
         emailHelper.sendMail("", null, "", "");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenSendMilInvokedWithoutSubjectArg_thenExceptionIsThrown() {
+    public void whenSendMilInvokedWithoutSubjectArgThenExceptionIsThrown() {
         emailHelper.sendMail("", new String[]{"", ""}, null, "");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenSendMilInvokedWithoutMsgArg_thenExceptionIsThrown() {
+    public void whenSendMilInvokedWithoutMsgArgThenExceptionIsThrown() {
         emailHelper.sendMail("", new String[]{"", ""}, "", null);
     }
 
     @Test
-    public void whenGetUserByTypeInvoked_thenUserRepositoryShouldInvoked() {
+    public void whenGetUserByTypeInvokedThenUserRepositoryShouldInvoked() {
         emailHelper.sendMail("", new String[]{"", ""}, "", "");
 
         verify(mailSender, times(1)).send(any(SimpleMailMessage.class));
