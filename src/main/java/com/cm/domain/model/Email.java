@@ -10,7 +10,9 @@ public class Email extends AbstractAuditableEntity {
 
     public static enum Columns {
         ID("id"),
-        EMAIL("email"),
+        FROM_("from"),
+        TO_("to"),
+        SUBJECT("subject"),
         BODY("body"),
         SENT("sent"),
         CREATEDAT("createdat"),
@@ -28,8 +30,14 @@ public class Email extends AbstractAuditableEntity {
         }
     }
 
-    @Column(name = "EMAIL")
-    private String email;
+    @Column(name = "FROM_")
+    private String from;
+
+    @Column(name = "TO_")
+    private String to;
+
+    @Column(name = "SUBJECT")
+    private String subject;
 
     @Column(name = "BODY")
     private String body;
@@ -41,8 +49,29 @@ public class Email extends AbstractAuditableEntity {
     public Email() {
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getFrom() {
+
+        return from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public String getSubject() {
+        return subject;
     }
 
     public void setBody(String body) {
@@ -51,10 +80,6 @@ public class Email extends AbstractAuditableEntity {
 
     public void setSentStatus(SentStatus sentStatus) {
         this.sentStatus = sentStatus;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getBody() {

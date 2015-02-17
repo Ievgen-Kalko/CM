@@ -13,7 +13,7 @@ public class CoinsFileReaderTest {
     private CoinsFileReader coinsFileReader;
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenGetSubscriptionsInvokedWithNullArg_thenExceptionIsThrown() throws CmGenericException {
+    public void whenGetSubscriptionsInvokedWithNullArgThenExceptionIsThrown() throws CmGenericException {
         coinsFileReader.unmarshall(null);
     }
 }

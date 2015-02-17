@@ -6,6 +6,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import java.util.List;
+
 @Component("com.cm.helpers.MailProcessor")
 public class EmailHelper {
 
@@ -18,12 +20,13 @@ public class EmailHelper {
 
     /**
      * Tries to send (@link email)
+     *
      * @param from
      * @param to
      * @param subject
      * @param msg
      */
-    public void sendMail(String from, String to, String subject, String msg) {
+    public void sendMail(String from, String[] to, String subject, String msg) {
         Assert.notNull(from, "method was invoked with null arg");
         Assert.notNull(to, "method was invoked with null arg");
         Assert.notNull(subject, "method was invoked with null arg");
@@ -36,5 +39,21 @@ public class EmailHelper {
         message.setSubject(subject);
         message.setText(msg);
         mailSender.send(message);
+    }
+
+    public String convertAddressesToString(List<String> emailAddresses) {
+        if (emailAddresses.isEmpty()) {
+            return "";
+        } else if (emailAddresses.size() == 1) {
+            return emailAddresses.get(0);
+        } else {
+            StringBuilder to = new StringBuilder();
+
+            for (String emailAddress : emailAddresses) {
+                to.append(emailAddress).append(";");
+            }
+
+            return to.toString();
+        }
     }
 }

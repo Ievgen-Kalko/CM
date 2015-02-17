@@ -13,12 +13,12 @@ public interface CoinService {
     void checkCoinParameters(Coin coin) throws CmGenericException;
 
     /**
-     * Tries to calculate coin's price
+     * Tries to calculate coin's price and returns ist status (i.e. true if calculated, otherwise - false)
      * @param coin
-     * @return
+     * @return true if price has been successfully calculated, otherwise - false
      * @throws CmGenericException
      */
-    boolean calculatePrice(Coin coin) throws CmGenericException;
+    boolean tryToCalculatePrice(Coin coin) throws CmGenericException;
 
     /**
      * Saves coin to the database

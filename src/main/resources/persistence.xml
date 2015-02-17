@@ -11,15 +11,6 @@
         <class>com.cm.domain.model.Email</class>
         <class>com.cm.domain.model.Subscription</class>
         <class>com.cm.domain.model.User</class>
-        <!--<properties>-->
-            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />-->
-            <!--<property name="hibernate.connection.url" value="jdbc:oracle:thin:@//localhost:1521/xe"/>-->
-            <!--<property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>-->
-            <!--<property name="hibernate.connection.username" value="CM"/>-->
-            <!--<property name="hibernate.connection.password" value="password1"/>-->
-            <!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
-            <!--<property name="show_sql" value="false"/>-->
-        <!--</properties>-->
     </persistence-unit>
 
 </persistence>

@@ -34,12 +34,12 @@ public class CoinServiceImplTest {
     private EmailHelper mailProcessor;
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenCheckCoinParametersInvokedWithNullArg_thenExceptionShouldBeThrown() throws CmGenericException {
+    public void whenCheckCoinParametersInvokedWithNullArgThenExceptionShouldBeThrown() throws CmGenericException {
         coinService.checkCoinParameters(null);
     }
 
     @Test(expected = CmGenericException.class)
-    public void whenCheckCoinParametersInvokedWithMissingComposition_thenExceptionShouldBeThrown() throws CmGenericException {
+    public void whenCheckCoinParametersInvokedWithMissingCompositionThenExceptionShouldBeThrown() throws CmGenericException {
         Coin coin = new Coin();
         coin.setCountry("UK");
         coin.setYear(1990);
@@ -50,7 +50,7 @@ public class CoinServiceImplTest {
     }
 
     @Test(expected = CmGenericException.class)
-    public void whenCheckCoinParametersInvokedWithMissingCountry_thenExceptionShouldBeThrown() throws CmGenericException {
+    public void whenCheckCoinParametersInvokedWithMissingCountryThenExceptionShouldBeThrown() throws CmGenericException {
         Coin coin = new Coin();
         coin.setComposition(Coin.CompositionType.GOLD);
         coin.setYear(1990);
@@ -61,7 +61,7 @@ public class CoinServiceImplTest {
     }
 
     @Test(expected = CmGenericException.class)
-    public void whenCheckCoinParametersInvokedWithMissingYear_thenExceptionShouldBeThrown() throws CmGenericException {
+    public void whenCheckCoinParametersInvokedWithMissingYearThenExceptionShouldBeThrown() throws CmGenericException {
         Coin coin = new Coin();
         coin.setComposition(Coin.CompositionType.GOLD);
         coin.setCountry("UK");
@@ -72,7 +72,7 @@ public class CoinServiceImplTest {
     }
 
     @Test(expected = CmGenericException.class)
-    public void whenCheckCoinParametersInvokedWithMissingGrade_thenExceptionShouldBeThrown() throws CmGenericException {
+    public void whenCheckCoinParametersInvokedWithMissingGradeThenExceptionShouldBeThrown() throws CmGenericException {
         Coin coin = new Coin();
         coin.setComposition(Coin.CompositionType.GOLD);
         coin.setCountry("UK");
@@ -83,12 +83,12 @@ public class CoinServiceImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenCalculatePriceInvokedWithNullArg_thenExceptionShouldBeThrown() throws CmGenericException {
-        coinService.calculatePrice(null);
+    public void whenCalculatePriceInvokedWithNullArgThenExceptionShouldBeThrown() throws CmGenericException {
+        coinService.tryToCalculatePrice(null);
     }
 
     @Test
-    public void whenCalculatePriceInvokedWithAlreadyExistedPrice_thenPriceNotChangedAndReturnTrue() throws CmGenericException {
+    public void whenCalculatePriceInvokedWithAlreadyExistedPriceThenPriceNotChangedAndReturnTrue() throws CmGenericException {
         Coin coin = new Coin();
         coin.setComposition(Coin.CompositionType.GOLD);
         coin.setCountry("UK");
@@ -98,7 +98,7 @@ public class CoinServiceImplTest {
         coin.setPrice(new BigDecimal(12));
 
         boolean expectedStatus = true;
-        boolean actualStatus = coinService.calculatePrice(coin);
+        boolean actualStatus = coinService.tryToCalculatePrice(coin);
 
         BigDecimal expectedPrice = new BigDecimal(12);
         BigDecimal actualPrice = coin.getPrice();
@@ -108,7 +108,7 @@ public class CoinServiceImplTest {
     }
 
     @Test
-    public void whenCalculatePriceInvokedWithNonExistedPriceButWithExistedRawPrice_thenCalculateByGradeInvoked() throws CmGenericException {
+    public void whenCalculatePriceInvokedWithNonExistedPriceButWithExistedRawPriceThenCalculateByGradeInvoked() throws CmGenericException {
         Coin coin = new Coin();
         coin.setComposition(Coin.CompositionType.GOLD);
         coin.setCountry("UK");
@@ -118,14 +118,14 @@ public class CoinServiceImplTest {
         coin.setRawPrice(new BigDecimal(23));
 
         boolean expectedStatus = true;
-        boolean actualStatus = coinService.calculatePrice(coin);
+        boolean actualStatus = coinService.tryToCalculatePrice(coin);
 
         assertTrue(expectedStatus == actualStatus);
         assertNotNull(coin.getPrice());
     }
 
     @Test
-    public void whenCalculatePriceInvokedWithNonExistedPriceAndRawPrice_thenFalseReturnedAndPriceIsNull() throws CmGenericException {
+    public void whenCalculatePriceInvokedWithNonExistedPriceAndRawPriceThenFalseReturnedAndPriceIsNull() throws CmGenericException {
         Coin coin = new Coin();
         coin.setComposition(Coin.CompositionType.GOLD);
         coin.setCountry("UK");
@@ -134,7 +134,7 @@ public class CoinServiceImplTest {
         coin.setGrade(Coin.GradeType.EXTRA_FINE);
 
         boolean expectedStatus = false;
-        boolean actualStatus = coinService.calculatePrice(coin);
+        boolean actualStatus = coinService.tryToCalculatePrice(coin);
 
         assertTrue(expectedStatus == actualStatus);
         assertNull(coin.getPrice());

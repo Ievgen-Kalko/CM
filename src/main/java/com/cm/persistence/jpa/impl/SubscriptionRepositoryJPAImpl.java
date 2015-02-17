@@ -27,7 +27,7 @@ public class SubscriptionRepositoryJPAImpl extends EntityRepositoryJPA<Subscript
 
         Session session = (Session) entityManager.getDelegate();
         Criteria criteria = session.createCriteria(Subscription.class);
-        criteria.add(Restrictions.eq("country", country));
+        criteria.add(Restrictions.or(Restrictions.eq("country", country), Restrictions.eq("country", "*")));
 
         return new HashSet<Subscription>(criteria.list());
     }
